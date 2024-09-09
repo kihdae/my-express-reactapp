@@ -7,7 +7,7 @@ const UserForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // make a request to your Express server
+    // make a request to te Express server
     fetch('http://localhost:3001/api/users', {
       method: 'POST',
       headers: {
