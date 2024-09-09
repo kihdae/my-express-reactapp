@@ -4,7 +4,6 @@ import './UserList.css';
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [newUser, setNewUser] = useState({ name: '' });
-
   useEffect(() => {
     fetch('http://localhost:3000/api/users')
       .then(response => response.json())
@@ -51,6 +50,8 @@ const UserList = () => {
       })
       .catch(error => console.error('Error deleting users:', error));
   };
+
+  
 
   return (
     <div className="user-list-container">
