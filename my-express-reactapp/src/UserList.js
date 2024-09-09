@@ -21,7 +21,7 @@ const UserList = () => {
       ...prevState,
       [name]: value 
     }));
-  };
+  }; // ANGELO'S GUIDANCE 
 
   const handleAddClick = () => {
     fetch('http://localhost:3000/api/users', {
