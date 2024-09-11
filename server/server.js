@@ -37,11 +37,28 @@ app.get('*', (req, res) => {
   res.json({ message: "This request doesn't exist"});
 });
 
+app.post('/api/journal', async (req, res) => {
+  try {
+    const { content } = req.body;
+
+    const user = await User.findByPk(userId); //thanks angelo
+    if (!user) {
+      return res.status(404).json({ error: 'endpoint f upped' });
+    }
+
+    const newJournalEntry = await user.createJournalEntry({ content });
+    res.status(201).json(newJournalEntry);
+  } catch (error) {
+    console.error('Error adding journal entry:', error);
+    res.status(500).json({ error: 'Failed to add journal entry' });
+  }
+});
+    
 // rouute to add a new user
 app.post('/api/users', async (req, res) => {
   try {
-    const { name } = req.body; 
-    const newUser = await User.create({ name }); // create a new user in db
+    const { name, } = req.body; 
+    const newUser = await User.create({ name,  }); // create a new user in db
     res.status(201).json(newUser); // send the created user as the response
   } catch (error) {
     res.status(500).json({ error: 'Failed to add user' });

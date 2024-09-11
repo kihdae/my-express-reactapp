@@ -11,6 +11,9 @@ const sequelize = new Sequelize({
 const User = sequelize.define('User', {
   name: {
     type: DataTypes.STRING, // 'name' is a string
+      },
+      journalEntries: {
+        type: DataTypes.JSON,
       }
 });
 
