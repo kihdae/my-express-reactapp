@@ -57,8 +57,8 @@ app.post('/api/journal', async (req, res) => {
 // rouute to add a new user
 app.post('/api/users', async (req, res) => {
   try {
-    const { name, } = req.body; 
-    const newUser = await User.create({ name,  }); // create a new user in db
+    const { name, journalEntries} = req.body; 
+    const newUser = await User.create({ name, journalEntries }); // create a new user in db
     res.status(201).json(newUser); // send the created user as the response
   } catch (error) {
     res.status(500).json({ error: 'Failed to add user' });
