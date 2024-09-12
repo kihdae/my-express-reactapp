@@ -29,9 +29,9 @@ const setupDatabase = async () => {
         { name: 'a' },
         { name: 'k' }
       ]);
-      console.log('database is ready with initial users');
+      console.log('db may just be working');
     } else {
-      console.log('users already exist, skipping insertion');
+      console.log('skippin ahead!');
     }
   } catch (error) {
     console.error('error setting up database:', error);

@@ -8,10 +8,10 @@ const UserList = () => {
     fetch('http://localhost:3000/api/users')
       .then(response => response.json())
       .then(data => {
-        console.log('Fetched data:', data);
+        console.log('data emulated:', data);
         setUsers(data);
       })
-      .catch(error => console.error('Error fetching users:', error));
+      .catch(error => console.error('fetching users did not work out:', error));
   }, []);
 
   const handleInputChange = (e) => {
@@ -34,9 +34,9 @@ const UserList = () => {
       .then(data => {
         setUsers(prevUsers => [...prevUsers, data]);
         setNewUser({ name: '' });
-        alert('User added successfully!');
+        alert('success.');
       })
-      .catch(error => console.error('Error adding user:', error));
+      .catch(error => console.error('Error:', error));
   };
 
   const handleDeleteAllClick = () => {
@@ -46,9 +46,9 @@ const UserList = () => {
       .then(response => response.json())
       .then(() => {
         setUsers([]); // clears users in frontend
-        alert('All users have been deleted.');
+        alert('it is all gone.');
       })
-      .catch(error => console.error('Error deleting users:', error));
+      .catch(error => console.error('you could not delete users:', error));
   };
 
   

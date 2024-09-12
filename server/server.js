@@ -17,7 +17,7 @@ app.get('/api/users', async (req, res) => {
     const users = await User.findAll(); // fetches users from the database
     res.json(users); // send JSON response
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch users' });
+    res.status(500).json({ error: 'brah' });
   }
 });
 
@@ -26,15 +26,15 @@ app.delete('/api/users', (req, res) => {
     where: {}, // delete all
   })
     .then(() => {
-      res.status(200).send({ message: 'All users have been deleted.' });
+      res.status(200).send({ message: 'are you happy>' });
     })
     .catch(err => {
-      res.status(500).send({ message: 'Error deleting users', error: err });
+      res.status(500).send({ message: 'deleted.....not', error: err });
     });
 });
 
 app.get('*', (req, res) => {
-  res.json({ message: "This request doesn't exist"});
+  res.json({ message: "guess what..."});
 });
 
 // rouute to add a new user
@@ -44,7 +44,7 @@ app.post('/api/users', async (req, res) => {
     const newUser = await User.create({ name }); // create a new user in db
     res.status(201).json(newUser); // send the created user as the response
   } catch (error) {
-    res.status(500).json({ error: 'Failed to add user' });
+    res.status(500).json({ error: 'cant.' });
   }
 });
 
