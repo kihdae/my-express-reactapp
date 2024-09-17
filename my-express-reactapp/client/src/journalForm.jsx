@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const JournalEntryForm = ({ onSubmit }) => {
+const JournalEntryForm = ({ onSubmit, userId }) => {
   const [newJournalEntry, setNewJournalEntry] = useState('');
 
   const handleJournalEntryChange = (event) => {
@@ -8,7 +8,7 @@ const JournalEntryForm = ({ onSubmit }) => {
   };
 
   const handleAddJournalEntry = async () => {
-    const url = ('http://localhost:3000/api/journal'); // Use a different endpoint
+    const url = 'http://localhost:3000/api/journal'; 
 
     try {
       const response = await fetch(url, {
@@ -16,22 +16,17 @@ const JournalEntryForm = ({ onSubmit }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ content: newJournalEntry }),
+        body: JSON.stringify({ content: newJournalEntry, userId }),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to add journal entry');
-      }
-
       const data = await response.json();
-      console.log('Journal entry added:', data);
+      console.log('entry added:', data);
 
-      // Clear input field after successful submission
       setNewJournalEntry('');
 
-      // Call the passed-down onSubmit function (if provided)
+      //  passed down onSubmit function 
       if (onSubmit) {
-        onSubmit(data); // Pass the added entry data
+        onSubmit(data); 
       }
     } catch (error) {
       console.error('Error adding journal entry:', error);

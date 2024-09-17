@@ -11,14 +11,32 @@ const sequelize = new Sequelize({
 const User = sequelize.define('User', {
   name: {
     type: DataTypes.STRING, // 'name' is a string
-      }
+      },
+      index: { 
+        type: DataTypes.INTEGER,
+        unique: true,
+  },
+});
+
+const JournalEntry = sequelize.define('JournalEntry', {
+  content: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  userId: { // key referencing the User model
+    type: DataTypes.INTEGER,
+    references: {
+      model: User,
+      key: 'id', //'id' will serve asprimary key for User
+    },
+  },
 });
 
 // function to sync the database and add initial users
 const setupDatabase = async () => {
   try {
     // create the table if it doesn't exist
-    await sequelize.sync();
+    await sequelize.sync()
 
     // check if there are any users already in the database
     const usersCount = await User.count();
@@ -29,9 +47,9 @@ const setupDatabase = async () => {
         { name: 'a' },
         { name: 'k' }
       ]);
-      console.log('db may just be working');
+      console.log('Users created:', await User.findAll());
     } else {
-      console.log('skippin ahead!');
+      console.log('users already exist, skipping insertion');
     }
   } catch (error) {
     console.error('error setting up database:', error);
@@ -39,11 +57,11 @@ const setupDatabase = async () => {
 };
 
 
-
-
+//association between journal and user
+User.hasMany(JournalEntry, { foreignKey: 'userId' });
 
 
 // call the setup function
 setupDatabase();
 
-module.exports = { User }; // export the user model for use in other parts of the application
+module.exports = { User, JournalEntry}; // export model for use in other parts of the application

@@ -13,6 +13,7 @@ const UserList = () => {
         const response = await fetch('http://localhost:3000/api/users');
         const data = await response.json();
         setUsers(data);
+        console.log(users)
       } catch (error) {
         console.error('Error fetching users:', error); 
   
@@ -79,7 +80,7 @@ const UserList = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ content: newJournalEntry }),
+      body: JSON.stringify({ content: newJournalEntry, userId}),
     });
 
       const data = await response.json();
