@@ -16,7 +16,7 @@ const sequelize = new Sequelize({
   storage: './database.sqlite',
 });
 
-// Define the User model
+
 const User = sequelize.define('User', {
   name: {
     type: DataTypes.STRING,
